@@ -57,14 +57,21 @@ FetchContent_MakeAvailable(fmtlib)
 # Adds fmt::fmt
 
 # The compiled library code is here
-#add_subdirectory(src)
+add_subdirectory(src)
 
 # The executable code is here
 add_subdirectory(apps)
 
 # Testing only available if this is the main app
 # Emergency override MODERN_CMAKE_BUILD_TESTING provided as well
-if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING) AND BUILD_TESTING)
+#if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING) AND BUILD_TESTING)
  #   add_subdirectory(tests)
+#endif()
+
+option(PACKAGE_TESTS "Build the tests" ON)
+if(PACKAGE_TESTS)
+    enable_testing()
+    include(GoogleTest)
+    add_subdirectory(tests)
 endif()
 
