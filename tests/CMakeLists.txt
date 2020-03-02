@@ -16,4 +16,9 @@ macro(package_add_test TESTNAME)
     set_target_properties(${TESTNAME} PROPERTIES FOLDER tests)
 endmacro()
 
-package_add_test(test_context test_context.cpp)
+package_add_test(test_webquerylib 
+    test_context.cpp
+    test_sqlparser.cpp
+)
+
+target_link_libraries(test_webquerylib webquerylib)

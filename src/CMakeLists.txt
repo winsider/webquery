@@ -3,10 +3,17 @@
 
 # Optionally glob, but only for CMake 3.12 or later:
 # file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${ModernCMakeExample_SOURCE_DIR}/include/modern/*.hpp")
-set(HEADER_LIST "${webquery_SOURCE_DIR}/include/webquery/context.hpp")
+set(HEADER_LIST 
+    "${webquery_SOURCE_DIR}/include/webquery/context.hpp"
+    "${webquery_SOURCE_DIR}/include/webquery/sqlparser.hpp"
+)
 
 # Make an automatic library - will be static or dynamic based on user setting
-add_library(webquerylib context.cpp ${HEADER_LIST})
+add_library(webquerylib STATIC
+    context.cpp
+    sqlparser.cpp 
+    ${HEADER_LIST}
+)
 
 # We need this directory, and users of our library will need it too
 target_include_directories(webquerylib PUBLIC ../include)
